@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Greet from './Greet';
+import './Login.css';
 
 class Login extends Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class Login extends Component {
     this.state = {
       username: '',
       comment: '',
-      skills: 'react'
+      skills: ['react']
     }
   }
   handleChange = event => {
@@ -21,8 +22,16 @@ class Login extends Component {
     })
   }
   handleSkill = event => {
+    var optArray = [];
+    const newOpt = [];
+    optArray = event.target.options;
+    for (var i = 0; i < optArray.length; i++) {
+      if(optArray[i].selected) {
+        newOpt.push(optArray[i].value);
+      }
+    }
     this.setState({
-      skills: event.target.value
+      skills: newOpt
     })
   }
   handleSubmit = event => {
@@ -30,16 +39,17 @@ class Login extends Component {
     event.preventDefault();
   }
   render() {
+    const { username, comment, skills } = this.state;
     return (
       <div className="App">
         <form onSubmit={this.handleSubmit} >
           <label htmlFor="">Username
           </label>
-          <input type="text" value={this.state.username} onChange={this.handleChange} />
+          <input type="text" value={username} onChange={this.handleChange} />
           <label htmlFor="">Comment</label>
-          <textarea id="" cols="30" rows="10" value={this.state.comment} onChange={this.handleComment}></textarea>
+          <textarea id="" cols="30" rows="10" value={comment} onChange={this.handleComment}></textarea>
           <label htmlFor="">Skills</label>
-          <select value={this.state.skills} onChange={this.handleSkill}>
+          <select value={skills} onChange={this.handleSkill} multiple={true}>
             <option value="react">React JS</option>
             <option value="angular">Angular JS</option>
             <option value="vue">Vue JS</option>
