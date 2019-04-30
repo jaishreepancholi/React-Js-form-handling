@@ -11,6 +11,7 @@ class Login extends Component {
       skills: ['react']
     }
   }
+ 
   handleChange = event => {
     this.setState({
       username: event.target.value
@@ -26,7 +27,7 @@ class Login extends Component {
     const newOpt = [];
     optArray = event.target.options;
     for (var i = 0; i < optArray.length; i++) {
-      if(optArray[i].selected) {
+      if (optArray[i].selected) {
         newOpt.push(optArray[i].value);
       }
     }
@@ -37,6 +38,15 @@ class Login extends Component {
   handleSubmit = event => {
     alert(this.state.username + ' ' + 'and' + ' ' + this.state.comment + ' ' + 'skillss' + ' ' + this.state.skills);
     event.preventDefault();
+    const formArray = []
+    let formData = {
+      'username': this.state.username,
+      'comment': this.state.comment,
+      'skills': this.state.skills
+    }
+    formArray.push(formData);
+    this.props.onSelectLanguage(formArray);   
+
   }
   render() {
     const { username, comment, skills } = this.state;

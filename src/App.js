@@ -4,10 +4,20 @@ import './App.css';
 import Login from './Login';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+     formValue: []
+    }
+  }
+  handleLanguage = (formValue) => {
+    this.setState({ formValue: formValue });
+    console.log("formValue parent calling", formValue);
+  }
   render() {
     return (
       <div className="App">
-        <Login />
+        <Login onSelectLanguage={this.handleLanguage} />
       </div>
     );
   }
